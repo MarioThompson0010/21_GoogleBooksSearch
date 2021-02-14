@@ -6,6 +6,7 @@ import { Link as a } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Saved from './Saved';
 
 function Search() {
     // Setting our component's initial state
@@ -20,9 +21,10 @@ function Search() {
     // Loads all books and sets them to books
     function loadBooks() {
         API.getBooks()
-            .then(res =>
-                setBooks(res.data)
-            )
+            .then(res => {
+                Saved.loadBooks(res.data);
+
+            })
             .catch(err => console.log(err));
     };
 
@@ -43,15 +45,41 @@ function Search() {
     // Then reload books from the database
     function handleFormSubmit(event) {
         event.preventDefault();
-        if (formObject.title && formObject.author) {
-            API.saveBook({
-                title: formObject.title,
-                author: formObject.author
-                //synopsis: formObject.synopsis
-            })
-                .then(res => loadBooks())
-                .catch(err => console.log(err));
-        }
+        const { name, value } = event.target;
+        //const title = event.target.dataValues["data-title"];
+        const description = event.target.attributes.getNamedItem("data-description").value;
+        const title = event.target.attributes.getNamedItem("data-title").value;
+        const infolink = event.target.attributes.getNamedItem("data-infolink").value;
+        const author = event.target.attributes.getNamedItem("data-author").value;
+        const image = event.target.attributes.getNamedItem("data-image").value;
+
+        // data-title={book.volumeInfo.title}
+        // data-description={book.volumeInfo.description}
+        // data-infolink={book.volumeInfo.infoLink}
+        // data-author={book.volumeInfo.authors[0]}
+        // data-image={book.volumeInfo.imageLinks.thumbnail}
+
+
+        //.data('key').key;
+
+
+        //         authors: { type: String, required: true },
+        //   description: {type: String, default: ""},
+        //   image: {type: String, default: "www.cnn.com"},
+        //   link: {type: String, default: ""},
+        //   title: { type: String, required: true }
+        //if (formObject.title && formObject.author) {
+        API.saveBook({
+            title: title,
+            authors: author,
+            image: image,
+            description: description,
+            link: infolink,
+            //synopsis: formObject.synopsis
+        })
+            .then(res => loadBooks())
+            .catch(err => console.log(err));
+        //}
     };
 
     function handleFormSearch(event) {
@@ -90,11 +118,11 @@ function Search() {
                 name="author"
                 placeholder="Author (required)"
               /> */}
-                        <TextArea
+                        {/* <TextArea
                             //onChange={handleInputChange}
                             name="synopsis"
                             placeholder="Synopsis (Optional)"
-                        />
+                        /> */}
                         <FormBtn
                             // disabled={!(formObject.author && formObject.title)}
                             onClick={handleFormSearch}
@@ -113,13 +141,29 @@ function Search() {
                                 <ListItem key={book.id} href={book.volumeInfo.infoLink} target="_blank">
 
                                     <strong>
+                                        {
+                                            book.volumeInfo.infoLink !== undefined ? ( <a href={book.volumeInfo.infoLink} target="_blank">
+                                                {book.volumeInfo.title} by {book.volumeInfo.authors ? book.volumeInfo.authors[0] : ""}
+                                            </a>) : "_target"
+                                        }
 
-                                        <a href={book.volumeInfo.infoLink} target="_blank">
-                                            {book.volumeInfo.title} by {book.volumeInfo.authors[0]}
-                                        </a>
                                     </strong>
 
-
+                                    {book.volumeInfo.description}
+                                    <br />
+                                    <img src={book.volumeInfo.imageLinks.thumbnail} />
+                                    <br />
+                                    <button
+                                        data-title={book.volumeInfo.title}
+                                        data-description={book.volumeInfo.description ? book.volumeInfo.description : "" }
+                                        data-infolink={book.volumeInfo.infoLink}
+                                        data-author={book.volumeInfo.authors ? book.volumeInfo.authors[0] : ""}
+                                        data-image={book.volumeInfo.imageLinks.thumbnail}
+                                        data-value={book.volumeInfo}
+                                        onClick={handleFormSubmit}
+                                    >
+                                        Submit Book
+                                    </button>
                                 </ListItem>
                             ))}
                         </List>

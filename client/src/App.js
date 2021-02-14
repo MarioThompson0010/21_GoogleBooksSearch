@@ -17,7 +17,9 @@ function App() {
             <Search />
           </Route>
           <Route exact path={["/Saved"]}>
-            <Saved/>
+            <Saved >
+
+            </Saved>
           </Route>
         </Switch>
       </div>

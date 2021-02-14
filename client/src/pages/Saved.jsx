@@ -11,7 +11,7 @@ function Saved(props) {
 
     // When this component mounts, grab the book with the _id of props.match.params.id
     // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-    const { id } = useParams()
+    const { id } = useParams();
     useEffect(() => {
         API.getBooks()
             .then(res => setBook(res.data))
@@ -25,11 +25,12 @@ function Saved(props) {
             .catch(err => console.log(err));
     }
 
-     // Loads all books and sets them to books
-     function loadBooks() {
+    // Loads all books and sets them to books
+    function loadBooks() {
         API.getBooks()
             .then(res =>
-                setBook(res.data.items)
+
+                setBook(res.data)
             )
             .catch(err => console.log(err));
     };
@@ -49,24 +50,28 @@ function Saved(props) {
             <Row>
                 <Col size="md-10 md-offset-1">
 
-                    {book.length ? (
-                        <List>
-                            {book.map(bookie => (
-                                <ListItem key={bookie.id}>
-                                    <Link to={"/books/" + bookie.id}>
-                                        <strong>
-                                            {bookie.volumeInfo.title} by {bookie.volumeInfo.authors}
-                                        </strong>
-                                    </Link>
-                                    {/* <LookupBtn onClick={() => deleteBook(bookie._id)} /> */}
-                                    <DeleteBtn onClick={() => deleteBook(bookie.id)} />
-                                    {/* <LookupBtn onClick={() => deleteBook(bookie.id)} /> */}
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                            <h3>No Results to Display</h3>
-                        )}
+                    {/* {book.length ? ( */}
+                    <List>
+                        {book.map(bookie => (
+                            <ListItem key={bookie._id}>
+                                {/* <Link to={"/books/" + bookie._id}> */}
+                                <strong>
+
+                                    <a href={bookie.link} target="_blank">
+                                        {bookie.title} by {bookie.authors}
+                                    </a>
+
+                                </strong>
+                                {/* </Link> */}
+                                {/* <LookupBtn onClick={() => deleteBook(bookie._id)} /> */}
+                                <DeleteBtn onClick={() => deleteBook(bookie._id)} />
+                                {/* <LookupBtn onClick={() => deleteBook(bookie.id)} /> */}
+                            </ListItem>
+                        ))}
+                    </List>
+                    {/* ) : (
+                             <h3>No Results to Display</h3>
+                         )} */}
 
 
                     {/* <article>
