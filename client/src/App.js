@@ -16,6 +16,9 @@ function App() {
           <Route exact path={["/", "/Search"]}>
             <Search />
           </Route>
+          <Route exact path={["/", "/21_GoogleBooksSearch"]}>
+            <Search />
+          </Route>
           <Route exact path={["/Saved"]}>
             <Saved >
 
