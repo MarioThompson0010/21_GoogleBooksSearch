@@ -84,7 +84,7 @@ function Saved(props) {
             </Row>
             <Row>
                 <Col size="md-2">
-                    <Link to="/">← Back to Authors</Link>
+                    <Link to="/">← Back to Titles</Link>
                 </Col>
             </Row>
         </Container>
