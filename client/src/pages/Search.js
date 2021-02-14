@@ -151,14 +151,14 @@ function Search() {
 
                                     {book.volumeInfo.description}
                                     <br />
-                                    <img src={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : "" } />
+                                    <img src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "" } />
                                     <br />
                                     <button
                                         data-title={book.volumeInfo.title}
                                         data-description={book.volumeInfo.description ? book.volumeInfo.description : "" }
                                         data-infolink={book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "" }
                                         data-author={book.volumeInfo.authors ? book.volumeInfo.authors[0] : ""}
-                                        data-image={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : ""}
+                                        data-image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ""}
                                         data-value={book.volumeInfo}
                                         onClick={handleFormSubmit}
                                     >
