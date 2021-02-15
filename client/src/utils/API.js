@@ -9,12 +9,6 @@ import axios from "axios";
 const BASEURL = "https://www.googleapis.com/books/v1/volumes?q="; //?key=AIzaSyC7S5uOXG1DVFHgYJS40Gt3Tx1eI7SVBl0";
 const rest = "";
 
-// export default {
-//   search: function(query) {
-//     return axios.get(BASEURL);
-//   }
-// };
-
 export default {
     searchBook: function(searchTerm) {
         return axios.get(BASEURL + searchTerm + rest);

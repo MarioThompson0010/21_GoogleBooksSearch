@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-//import Jumbotron from "../components/Jumbotron";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 
@@ -35,51 +34,26 @@ function Saved(props) {
             .catch(err => console.log(err));
     };
 
-
     return (
         <Container fluid>
             <Row>
                 <Col size="md-12">
-                    {/* <Jumbotron>
-              <h1>
-                {book.title} by {book.author}
-              </h1>
-            </Jumbotron> */}
                 </Col>
             </Row>
             <Row>
                 <Col size="md-10 md-offset-1">
-
-                    {/* {book.length ? ( */}
                     <List>
                         {book.map(bookie => (
                             <ListItem key={bookie._id}>
-                                {/* <Link to={"/books/" + bookie._id}> */}
                                 <strong>
-
                                     <a href={bookie.link} target="_blank">
                                         {bookie.title} by {bookie.authors}
                                     </a>
-
                                 </strong>
-                                {/* </Link> */}
-                                {/* <LookupBtn onClick={() => deleteBook(bookie._id)} /> */}
                                 <DeleteBtn onClick={() => deleteBook(bookie._id)} />
-                                {/* <LookupBtn onClick={() => deleteBook(bookie.id)} /> */}
                             </ListItem>
                         ))}
                     </List>
-                    {/* ) : (
-                             <h3>No Results to Display</h3>
-                         )} */}
-
-
-                    {/* <article>
-              <h1>Synopsis</h1>
-              <p>
-                {book.synopsis}
-              </p>
-            </article> */}
                 </Col>
             </Row>
             <Row>
@@ -90,6 +64,5 @@ function Saved(props) {
         </Container>
     );
 }
-
 
 export default Saved;
