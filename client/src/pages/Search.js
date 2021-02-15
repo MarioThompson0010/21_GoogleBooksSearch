@@ -10,8 +10,8 @@ import Saved from './Saved';
 
 function Search() {
     // Setting our component's initial state
-    const [books, setBooks] = useState([])
-    const [formObject, setFormObject] = useState({})
+    const [books, setBooks] = useState([]);
+    const [formObject, setFormObject] = useState({});
 
     // Load all books and store them with setBooks
     useEffect(() => {
@@ -22,7 +22,7 @@ function Search() {
     function loadBooks() {
         API.getBooks()
             .then(res => {
-                Saved.loadBooks(res.data);
+                Saved.loadBooks();
 
             })
             .catch(err => console.log(err));
