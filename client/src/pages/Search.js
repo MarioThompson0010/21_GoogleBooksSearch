@@ -6,8 +6,6 @@ import { Link as a } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import SavedFunc from './SavedFunc';
-//import * as moment from 'moment/moment';
 import { useHistory } from "react-router-dom";
 
 
@@ -20,19 +18,15 @@ function Search() {
 
     // Load all books and store them with setBooks
     useEffect(() => {
-        // loadBooks()
+        // loadBooks() // this would have loaded the books
     }, [])
 
     // Loads all books and sets them to books
     function loadBooks() {
         API.getBooks()
             .then(res => {
-                //SavedFunc.loadBooks();
-                
-                history.push('/SavedFunc');
-                // <Redirect>
-
-                // </Redirect>
+                // if you need to use parameters, this is how you do it
+                history.push({pathname: "/SavedFunc", state: {detail: res.data}});
             })
             .catch(err => console.log(err));
     };
@@ -84,8 +78,6 @@ function Search() {
             .catch(err => console.log(err));
     };
 
-
-
     return (
         <Container fluid>
             <Row>
@@ -136,7 +128,7 @@ function Search() {
                                         data-value={book.volumeInfo}
                                         onClick={handleFormSubmit}
                                     >
-                                        Submit Book
+                                        Save Book
                                     </button>
                                 </ListItem>
                             ))}
