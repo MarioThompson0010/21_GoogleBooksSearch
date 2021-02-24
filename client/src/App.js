@@ -1,7 +1,7 @@
 //import React from "react";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Saved from "./pages/Saved";
+import SavedFunc from "./pages/SavedFunc";
 import Search from "./pages/Search";
 import logo from "./logo.svg";
 import "./App.css";
@@ -19,10 +19,10 @@ function App() {
           <Route exact path={["/", "/21_GoogleBooksSearch"]}>
             <Search />
           </Route>
-          <Route exact path={["/Saved"]}>
-            <Saved >
+          <Route exact path={["/SavedFunc"]}>
+            <SavedFunc >
 
-            </Saved>
+            </SavedFunc>
           </Route>
         </Switch>
       </div>

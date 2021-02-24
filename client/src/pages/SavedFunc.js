@@ -1,38 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 
-function Saved(props) {
-    const [book, setBook] = useState([]);
+
+
+function SavedFunc(props) {
 
     // When this component mounts, grab the book with the _id of props.match.params.id
     // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+    const [book, setBook] = useState([]);
+
     const { id } = useParams();
     useEffect(() => {
         API.getBooks()
             .then(res => setBook(res.data))
             .catch(err => console.log(err));
-    }, []);
+    }, [])
+
 
     // Deletes a book from the database with a given id, then reloads books from the db
-    function deleteBook(id) {
+   function deleteBook(id) {
         API.deleteBook(id)
             .then(res => loadBooks())
             .catch(err => console.log(err));
     }
 
     // Loads all books and sets them to books
-    function loadBooks() {
+     const loadBooks = ()=> {
         API.getBooks()
             .then(res =>
 
                 setBook(res.data)
             )
             .catch(err => console.log(err));
-    };
+    }
 
     return (
         <Container fluid>
@@ -64,5 +68,8 @@ function Saved(props) {
         </Container>
     );
 }
+export default SavedFunc;
+//module.exports = SavedFunc;
 
-export default Saved;
+
+

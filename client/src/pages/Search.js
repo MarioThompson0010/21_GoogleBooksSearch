@@ -6,10 +6,15 @@ import { Link as a } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import Saved from './Saved';
+import SavedFunc from './SavedFunc';
+//import * as moment from 'moment/moment';
+import { useHistory } from "react-router-dom";
+
 
 function Search() {
     // Setting our component's initial state
+    let history = useHistory();
+
     const [books, setBooks] = useState([]);
     const [formObject, setFormObject] = useState({});
 
@@ -22,7 +27,12 @@ function Search() {
     function loadBooks() {
         API.getBooks()
             .then(res => {
-                Saved.loadBooks();
+                //SavedFunc.loadBooks();
+                
+                history.push('/SavedFunc');
+                // <Redirect>
+
+                // </Redirect>
             })
             .catch(err => console.log(err));
     };
@@ -63,6 +73,7 @@ function Search() {
     };
 
     function handleFormSearch(event) {
+
         event.preventDefault();
         API.searchBook(formObject.title)
             .then(res => {
@@ -72,6 +83,8 @@ function Search() {
             })
             .catch(err => console.log(err));
     };
+
+
 
     return (
         <Container fluid>
@@ -86,7 +99,7 @@ function Search() {
                             name="title"
                             placeholder="Title (required)"
                         />
-                        
+
                         <FormBtn
                             onClick={handleFormSearch}
                         >

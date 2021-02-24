@@ -14,7 +14,7 @@ function Nav() {
       {/* </a> */}
       {/* <a className="navbar-brand" href="/"> */}
       <Link className="navbar-brand"
-              to="/Saved"
+              to="/SavedFunc"
             >
               Go to Saved Books
             </Link>
